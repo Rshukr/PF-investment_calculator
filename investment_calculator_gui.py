@@ -11,15 +11,20 @@ class CapitalGainCalculatorGUI:
         
         self.title = "Investment Calculator"
         master.title(self.title)
-                
-        self.logo = tk.PhotoImage(file="./images/pf_calculator_logo.png")
+        
+        logo_path = os.path.join("images", "pf_calculator_logo.png")
+        self.logo = tk.PhotoImage(file=logo_path)
         master.wm_iconphoto(True, self.logo)
 
         self.font_style = ("Arial", 12)
         self.title_font_style = ("Segoe UI", 18)
 
-        self.frame = 0
-        self.menu_bar = 0
+        # for i in range(6):
+        #     self.master.grid_rowconfigure(i, weight=1)
+        #     self.master.grid_columnconfigure(i, weight=1)
+
+        self.frame = None
+        self.menu_bar = None
         self.create_home_page()
         
     def create_home_page(self):
@@ -32,7 +37,7 @@ class CapitalGainCalculatorGUI:
             self.menu_bar.destroy()
         
         self.frame = tk.Frame(self.master, bg='white')
-        self.frame.grid(row=0, column=0, sticky="ns")
+        self.frame.grid(row=0, column=0, sticky="nsew")
         
         self.home_logo = tk.Label(self.frame, image=self.logo)
         self.home_logo.grid(row=1, column=0, columnspan=2, pady=10)
@@ -44,10 +49,10 @@ class CapitalGainCalculatorGUI:
         self.investment_return_button.grid(row=2, column=0, columnspan=2, pady=10)
         
         self.start_amount_button = tk.Button(self.frame, text="Calculate Start Amount", command=lambda : [self.create_menu_bar(), self.create_widgets_target()], font=self.font_style, bg="#74FE8D", fg="black", padx=10, pady=5)
-        self.start_amount_button.grid(row=4, column=0, columnspan=2, pady=10)
+        self.start_amount_button.grid(row=4, column=0, columnspan=2, pady=10, sticky="ns")
         
         self.start_amount_button = tk.Button(self.frame, text="Open Calculator", command=self.open_calculator, font=self.font_style, bg="#74FE8D", fg="black", padx=10, pady=5)
-        self.start_amount_button.grid(row=6, column=0, columnspan=2, pady=10)
+        self.start_amount_button.grid(row=6, column=0, columnspan=2, pady=10, sticky="ns")
         
     def open_calculator(self):
         if os.name == 'posix':
